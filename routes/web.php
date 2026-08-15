@@ -4,14 +4,6 @@ use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/teste-render', function () {
-    return response()->json([
-        'status' => 'ok',
-        'laravel' => app()->version(),
-        'php' => PHP_VERSION,
-        'environment' => app()->environment(),
-    ]);
-});
 
 Route::get('/', function () {
     return redirect()->route('login');

@@ -62,5 +62,6 @@ RUN a2enconf laravel
 # Porta
 EXPOSE 80
 
+
 # Inicialização
 CMD ["apache2-foreground"]
