@@ -26,7 +26,7 @@
 
         .titulo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .titulo h1 {
@@ -35,6 +35,25 @@
 
         .titulo p {
             color: #666;
+        }
+
+        .navegacao {
+            margin-bottom: 20px;
+        }
+
+        .btn-painel {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #374151;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-painel:hover {
+            background: #1f2937;
         }
 
         .card {
@@ -154,34 +173,43 @@
         <p>Controle seu salário e seus gastos</p>
     </div>
 
+    <div class="navegacao">
+        <a
+            href="{{ route('dashboard') }}"
+            class="btn-painel"
+        >
+            ← Voltar ao Painel
+        </a>
+    </div>
+
     <div class="card">
 
-    <form action="{{ route('financeiro.salario') }}" method="POST">
+        <form action="{{ route('financeiro.salario') }}" method="POST">
 
-        @csrf
+            @csrf
 
-        <div class="campo">
-            <label for="salario">Meu salário</label>
+            <div class="campo">
+                <label for="salario">Meu salário</label>
 
-            <input
-                type="number"
-                id="salario"
-                name="salario"
-                value="{{ $salario }}"
-                placeholder="Digite seu salário"
-                step="0.01"
-                min="0"
-                required
-            >
-        </div>
+                <input
+                    type="number"
+                    id="salario"
+                    name="salario"
+                    value="{{ $salario }}"
+                    placeholder="Digite seu salário"
+                    step="0.01"
+                    min="0"
+                    required
+                >
+            </div>
 
-        <button type="submit" class="btn btn-adicionar">
-            Salvar salário
-        </button>
+            <button type="submit" class="btn btn-adicionar">
+                Salvar salário
+            </button>
 
-    </form>
+        </form>
 
-</div>
+    </div>
 
     <div class="card">
 
@@ -200,17 +228,17 @@
                 </div>
 
                 <form
-    action="{{ route('financeiro.gasto.excluir', $gasto) }}"
-    method="POST"
-    onsubmit="return confirm('Deseja realmente excluir este gasto?')"
->
-    @csrf
-    @method('DELETE')
+                    action="{{ route('financeiro.gasto.excluir', $gasto) }}"
+                    method="POST"
+                    onsubmit="return confirm('Deseja realmente excluir este gasto?')"
+                >
+                    @csrf
+                    @method('DELETE')
 
-    <button type="submit" class="btn btn-excluir">
-        Excluir
-    </button>
-</form>
+                    <button type="submit" class="btn btn-excluir">
+                        Excluir
+                    </button>
+                </form>
 
             </div>
 
@@ -224,39 +252,39 @@
 
         <form action="{{ route('financeiro.gasto') }}" method="POST">
 
-    @csrf
+            @csrf
 
-    <div class="campo">
-        <label for="descricao">Descrição do gasto</label>
+            <div class="campo">
+                <label for="descricao">Descrição do gasto</label>
 
-        <input
-            type="text"
-            id="descricao"
-            name="descricao"
-            placeholder="Ex.: Aluguel, Mercado, Luz..."
-            required
-        >
-    </div>
+                <input
+                    type="text"
+                    id="descricao"
+                    name="descricao"
+                    placeholder="Ex.: Aluguel, Mercado, Luz..."
+                    required
+                >
+            </div>
 
-    <div class="campo">
-        <label for="valor">Valor</label>
+            <div class="campo">
+                <label for="valor">Valor</label>
 
-        <input
-            type="number"
-            id="valor"
-            name="valor"
-            placeholder="0,00"
-            step="0.01"
-            min="0.01"
-            required
-        >
-    </div>
+                <input
+                    type="number"
+                    id="valor"
+                    name="valor"
+                    placeholder="0,00"
+                    step="0.01"
+                    min="0.01"
+                    required
+                >
+            </div>
 
-    <button type="submit" class="btn btn-adicionar">
-        + Adicionar gasto
-    </button>
+            <button type="submit" class="btn btn-adicionar">
+                + Adicionar gasto
+            </button>
 
-</form>
+        </form>
 
     </div>
 
@@ -267,25 +295,28 @@
         <div class="resumo">
 
             <div class="resumo-item">
-    <span>Salário</span>
-    <strong id="resumo-salario">
-        R$ {{ number_format($salario, 2, ',', '.') }}
-    </strong>
-</div>
+                <span>Salário</span>
+
+                <strong id="resumo-salario">
+                    R$ {{ number_format($salario, 2, ',', '.') }}
+                </strong>
+            </div>
 
             <div class="resumo-item">
                 <span>Total de gastos</span>
+
                 <strong>
                     R$ {{ number_format($totalGastos, 2, ',', '.') }}
                 </strong>
             </div>
 
             <div class="resumo-item">
-    <span>Quanto sobrou</span>
-    <strong id="resumo-sobra">
-        R$ {{ number_format($sobra, 2, ',', '.') }}
-    </strong>
-</div>
+                <span>Quanto sobrou</span>
+
+                <strong id="resumo-sobra">
+                    R$ {{ number_format($sobra, 2, ',', '.') }}
+                </strong>
+            </div>
 
         </div>
 

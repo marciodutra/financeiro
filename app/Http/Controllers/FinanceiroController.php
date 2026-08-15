@@ -7,6 +7,24 @@ use Illuminate\Http\Request;
 
 class FinanceiroController extends Controller
 {
+    public function dashboard()
+    {
+        $user = auth()->user();
+
+        $salario = $user->salario ?? 0;
+
+        $totalGastos = Gasto::where('user_id', $user->id)
+            ->sum('valor');
+
+        $sobra = $salario - $totalGastos;
+
+        return view('dashboard', compact(
+            'salario',
+            'totalGastos',
+            'sobra'
+        ));
+    }
+
     public function index()
     {
         $user = auth()->user();
